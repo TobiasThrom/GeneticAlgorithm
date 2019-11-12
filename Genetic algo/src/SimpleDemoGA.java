@@ -35,14 +35,19 @@ public class SimpleDemoGA {
             demo.selection();
           
             
-            //Do crossover
-            for(int i=0; i< demo.population.popSize; i++) {
+            //Do crossover to create new Individuals from the two best Individuals of the prev. generation
+            for(int i=0; i< demo.population.popSize-2; i++) {
                 demo.population.individuals[i] = demo.crossover();
                 //Do mutation under a random probability
                 if (rn.nextInt()%7 < 5) {
                     demo.mutation(demo.population.individuals[i]);
                 }
-            }
+            } 
+            // Add the two best Individuals to the next generation
+
+            demo.population.individuals[demo.population.popSize-2] = demo.fittest;
+            demo.population.individuals[demo.population.popSize-1] = demo.secondFittest;
+
 
 
             //Calculate new fitness value
